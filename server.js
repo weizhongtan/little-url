@@ -2,11 +2,20 @@ var express = require("express");
 var app = express();
 var MongoClient = require("mongodb").MongoClient;
 var validUrl = require("valid-url");
+var url = require('url');
 var mongoUrl = process.env.MONGODB_URI;
+
+function fullUrl(req) {
+  return url.format({
+    protocol: req.protocol,
+    hostname: req.hostname
+  });
+}
 
 app.use("/", express.static("public"));
 
 app.get("/new/*", function(req, res) {
+  var base = fullUrl(req);
   var uri = req.params[0];
   if (validUrl.isHttpUri(uri) || validUrl.isHttpsUri(uri)) {
     MongoClient.connect(mongoUrl, function(err, db) {
@@ -17,10 +26,10 @@ app.get("/new/*", function(req, res) {
           short: number + 1
         };
         urls.insert(doc, function(err, data) {
-          console.log("created new url for: \n" + uri + "\n at \n" + doc.short);
+          console.log("created new url for: \n" + uri + "\n at \n" + base + "/" + doc.short);
           res.end(JSON.stringify({
             original_url: uri,
-            short_url: doc.short
+            short_url: base + '/' + doc.short
           }))
           db.close();
         })
@@ -36,11 +45,15 @@ app.get("/:number", function(req, res) {
   MongoClient.connect(mongoUrl, function(err, db) {
     var urls = db.collection("urls");
     urls.find({
-      short: "https://fcc-api-projects-wztan.c9users.io/little-url/" + number
+      short: Number(number)
     }).toArray(function(err, doc) {
-      var url = doc[0].long;
-      console.log("redirecting to\n " + url)
-      res.redirect(url);
+      if (doc[0]) {
+        var url = doc[0].long;
+        console.log("redirecting to\n " + url)
+        res.redirect(url);
+      } else {
+        res.end("invalid short url")
+      }
     })
   })
 })
