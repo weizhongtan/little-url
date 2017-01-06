@@ -2,11 +2,12 @@ var express = require("express");
 var app = express();
 var MongoClient = require("mongodb").MongoClient;
 var validUrl = require("valid-url");
-var mongoUrl = "mongodb://" + process.env.IP + "/local";
+var mongoUrl = process.env.MONGODB_URI;
+console.log(process.env.MONGODB_URI);
 
-app.use("/little-url", express.static("public"));
+app.use("/", express.static("public"));
 
-app.get("/little-url/new/*", function(req, res) {
+app.get("/new/*", function(req, res) {
   var uri = req.params[0];
   if (validUrl.isHttpUri(uri) || validUrl.isHttpsUri(uri)) {
     MongoClient.connect(mongoUrl, function(err, db) {
@@ -14,7 +15,7 @@ app.get("/little-url/new/*", function(req, res) {
       urls.count(function(err, number) {
         var doc = {
           long: uri,
-          short: "https://fcc-api-projects-wztan.c9users.io/little-url/" + (number + 1)
+          short: number + 1
         };
         urls.insert(doc, function(err, data) {
           console.log("created new url for: \n" + uri + "\n at \n" + doc.short);
@@ -31,7 +32,7 @@ app.get("/little-url/new/*", function(req, res) {
   }
 })
 
-app.get("/little-url/:number", function(req, res) {
+app.get("/:number", function(req, res) {
   var number = req.params.number;
   MongoClient.connect(mongoUrl, function(err, db) {
     var urls = db.collection("urls");
