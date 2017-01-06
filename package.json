@@ -1,6 +1,6 @@
 {
   "name": "little-url",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "url shortening microservice",
   "main": "index.html",
   "dependencies": {
@@ -17,10 +17,13 @@
     "type": "git",
     "url": "git+https://github.com/weizhongtan/little-url.git"
   },
-  "author": "",
+  "author": "wzt",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/weizhongtan/little-url/issues"
   },
-  "homepage": "https://github.com/weizhongtan/little-url#readme"
+  "homepage": "https://github.com/weizhongtan/little-url#readme",
+  "engines": {
+    "node": "6.9.2"
+  }
 }
