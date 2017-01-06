@@ -3,7 +3,6 @@ var app = express();
 var MongoClient = require("mongodb").MongoClient;
 var validUrl = require("valid-url");
 var mongoUrl = process.env.MONGODB_URI;
-console.log(process.env.MONGODB_URI);
 
 app.use("/", express.static("public"));
 
