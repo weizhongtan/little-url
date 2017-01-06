@@ -5,7 +5,7 @@ var validUrl = require("valid-url");
 var url = require('url');
 var mongoUrl = process.env.MONGODB_URI;
 
-function fullUrl(req) {
+function getDomain(req) {
   return url.format({
     protocol: req.protocol,
     hostname: req.hostname
@@ -15,7 +15,7 @@ function fullUrl(req) {
 app.use("/", express.static("public"));
 
 app.get("/new/*", function(req, res) {
-  var base = fullUrl(req);
+  var base = getDomain(req);
   var uri = req.params[0];
   if (validUrl.isHttpUri(uri) || validUrl.isHttpsUri(uri)) {
     MongoClient.connect(mongoUrl, function(err, db) {
@@ -26,7 +26,11 @@ app.get("/new/*", function(req, res) {
           short: number + 1
         };
         urls.insert(doc, function(err, data) {
-          console.log("created new url for: \n" + uri + "\n at \n" + base + "/" + doc.short);
+          console.log(
+            "created new url for: \n" +
+            uri +
+            "\n at \n" +
+            base + "/" + doc.short);
           res.end(JSON.stringify({
             original_url: uri,
             short_url: base + '/' + doc.short

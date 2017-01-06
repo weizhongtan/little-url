@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>URL Shortening Microservice</title>
-        <link rel="stylesheet" type="text/css" href="style.css">
-    </head>
-    <body>
-        <h1>Welcome to the URL Shortening Microservice.</h1>
-        <h2>Example usage:</h2>
-        <p>input - creating little url</p>
-        <code><a href="http://maketiny.herokuapp.com/new/https://www.google.com">http://maketiny.herokuapp.com/new/https://www.google.com</a></code>
-        <br>
-        <p>output</p>
-        <code>{"original_url":"https://www.google.com","short_url":"http://maketiny.herokuapp.com/3"}</code>
-        <p>output (invalid input)</p>
-        <code>invalid output</code>
-        <p>then visit the newly created little url</p>
-        <code><a href="http://maketiny.herokuapp.com/3">http://maketiny.herokuapp.com/3</a></code>
-        <p>made by Wei-Zhong Tan (2016)</p>
-    </body>
+<head>
+  <title>URL Shortening Microservice</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Welcome to the URL Shortening Microservice.</h1>
+    <h2>Example usage:</h2>
+    <p>input - creating little url</p>
+    <code><a href="http://maketiny.herokuapp.com/new/https://www.google.com">http://maketiny.herokuapp.com/new/https://www.google.com</a></code>
+    <br>
+    <p>output</p>
+    <code>{"original_url":"https://www.google.com","short_url":"http://maketiny.herokuapp.com/3"}</code>
+    <p>output (invalid input)</p>
+    <code>invalid url</code>
+    <p>then visit the newly created shortened url</p>
+    <code><a href="http://maketiny.herokuapp.com/3">http://maketiny.herokuapp.com/3</a></code>
+    <p>made by <a href="https://github.com/weizhongtan">Wei-Zhong Tan</a> (2016)</p>
+  </div>
+</body>
 </html>

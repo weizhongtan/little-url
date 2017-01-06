@@ -1,8 +1,16 @@
 h1, h2, p {
-    font-family: Helvetica;
+    font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+a {
+  color: rgb(69, 122, 210);
 }
 
 code {
     color: #777;
     background-color: #eee;
+}
+
+.container {
+  margin: auto;
 }
