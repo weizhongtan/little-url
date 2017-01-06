@@ -1,0 +1,25 @@
+{
+  "name": "little-url",
+  "version": "1.0.0",
+  "description": "url shortening microservice",
+  "main": "index.html",
+  "dependencies": {
+    "express": "^4.14.0",
+    "mongodb": "^2.2.16"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/weizhongtan/little-url.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/weizhongtan/little-url/issues"
+  },
+  "homepage": "https://github.com/weizhongtan/little-url#readme"
+}
